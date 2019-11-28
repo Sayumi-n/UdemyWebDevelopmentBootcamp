@@ -9,7 +9,9 @@
   "author": "sayumi",
   "license": "ISC",
   "dependencies": {
-    
-    "express": "^4.17.1"
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.17.1",
+    "lodash": "^4.17.11"
   }
 }

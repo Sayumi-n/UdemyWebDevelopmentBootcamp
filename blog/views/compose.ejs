@@ -1,5 +1,21 @@
-<%- include("header") -%>
+<%- include("partials/header") -%>
 
+<div class="box" id="heading">
+  <h1> <%= composeTitle %> </h1>
+</div>
 
+<div class="box">
+  <form class="item" action="/compose" method="post">
+    <div class="form-group">
+      <label for="">Title</label>
+      <input type="text" class="form-control" name="postTitle" placeholder="" value="" autocomplete="">
+    </div>
+    <div class="form-group">
+      <label for="">Post</label>
+      <textarea class="form-control" name="postBody" rows="5" cols="30"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" name="button" value=<%= %>>Publish</button>
+  </form>
+</div>
 
-<%- include("footer") -%>
+<%- include("partials/footer") -%>
