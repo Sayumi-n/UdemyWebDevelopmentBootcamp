@@ -43,11 +43,11 @@ Item.insertMany(defaultItems, function(err){
 
 app.get("/", function(req, res) {
 
-  Item.find({}, function(err, foundItems){
-    console.log(foundItems);
-  });
+  
 
-  res.render("list", {listTitle: "Today", newListItems: items});
+  Item.find({}, function(err, foundItems){
+      res.render("list", {listTitle: "Today", newListItems: foundItems});
+  });
 
 });
 
