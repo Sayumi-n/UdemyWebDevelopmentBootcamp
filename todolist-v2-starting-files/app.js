@@ -33,35 +33,51 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
-Item.insertMany(defaultItems, function(err){
-  if(err){
-    console.log(err);
-  }else{
-    console.log("Successfully saved default items to database.")
-  }
-})
+
+
 
 app.get("/", function(req, res) {
 
-  
+
 
   Item.find({}, function(err, foundItems){
+
+    if(foundItems.length === 0) {
+      Item.insertMany(defaultItems, function(err){
+        if(err){
+          console.log(err);
+        }else{
+          console.log("Successfully saved default items to database.")
+        }
+      });
+      res.redirect("/");
+    }else{
       res.render("list", {listTitle: "Today", newListItems: foundItems});
+    }
   });
 
 });
 
 app.post("/", function(req, res){
 
-  const item = req.body.newItem;
+  const itemName = req.body.newItem;
+  const item = new Item({
+    name: itemName
+  });
 
-  if (req.body.list === "Work") {
-    workItems.push(item);
-    res.redirect("/work");
-  } else {
-    items.push(item);
-    res.redirect("/");
-  }
+  item.save();
+  res.redirect("/");
+
+});
+
+app.post("/delete", function(req, res){
+  const checkedItemId = req.body.checkbox;
+
+  Item.findByIdAndRemove(checkedItemId, function(err){
+    is(!err){
+      console.log("Successfully deleted checked items")
+    }
+  });
 });
 
 app.get("/work", function(req,res){
